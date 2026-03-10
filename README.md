@@ -1,6 +1,6 @@
 # Google Cloud Next 2026 - Session Assets
 
-This repository contains demo code and other assets for the [Google Cloud Next 2026](https://www.googlecloudevents.com/next-vegas/) sessions (eg. breakout sessions, lighting talks), and their companion codelabs.
+This repository contains demo code and other assets for the [Google Cloud Next 2026](https://www.googlecloudevents.com/next-vegas/) sessions (eg. breakout sessions, lightning talks), and their companion codelabs.
 
 ## Repository Structure
 
