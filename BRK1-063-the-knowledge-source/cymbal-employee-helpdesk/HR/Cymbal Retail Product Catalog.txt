@@ -1,0 +1,124 @@
+# Cymbal Retail Product Catalog - Spring 2026
+{: #product-catalog }
+
+{# disableFinding(METADATA_ABSENT) #}
+
+## Cymbal Quantum-X Headphones
+{: #quantum-x-headphones }
+
+The first headphones with built-in Gemini translation.
+
+- **Price:** $299.00
+- **SKU:** CYM-QX-2026
+
+## Cymbal Solar-Step Sneakers
+{: #solar-step-sneakers }
+
+Smart sneakers that charge your phone while you walk.
+
+- **Price:** $150.00
+- **SKU:** CYM-SS-SOLAR
+
+## Cymbal Aura-Wrap Scarf
+{: #aura-wrap-scarf }
+
+A temperature-controlled scarf that syncs with local weather data.
+
+- **Price:** $85.00
+- **SKU:** CYM-AW-2026
+
+## Cymbal Vision-Pro Contacts
+{: #vision-pro-contacts }
+
+Augmented reality contact lenses for real-time navigation.
+
+- **Price:** $599.00
+- **SKU:** CYM-VP-CON
+
+## Cymbal Pulse-Watch Elite
+{: #pulse-watch-elite }
+
+Bio-metric watch that predicts stress levels and suggests breathing exercises.
+
+- **Price:** $199.00
+- **SKU:** CYM-PW-ELITE
+
+## Cymbal Hydro-Go Bottle
+{: #hydro-go-bottle }
+
+Self-cleaning water bottle with integrated hydration tracking.
+
+- **Price:** $45.00
+- **SKU:** CYM-HG-2026
+
+## Cymbal Aero-Pack Backpack
+{: #aero-pack-backpack }
+
+Anti-gravity backpack that reduces perceived weight by 50%.
+
+- **Price:** $250.00
+- **SKU:** CYM-AP-AIR
+
+## Cymbal Lumen-Thread Jacket
+{: #lumen-thread-jacket }
+
+Reflective safety jacket that changes color based on traffic proximity.
+
+- **Price:** $175.00
+- **SKU:** CYM-LT-2026
+
+## Cymbal Sound-Sleep Pillow
+{: #sound-sleep-pillow }
+
+Pillow with bone-conduction speakers for personalized white noise.
+
+- **Price:** $120.00
+- **SKU:** CYM-SSP-2026
+
+## Cymbal Geo-Tag Luggage
+{: #geo-tag-luggage }
+
+Smart luggage that automatically checks itself in at Hub locations.
+
+- **Price:** $350.00
+- **SKU:** CYM-GTL-2026
+
+## Cymbal Titan-Grip Gloves
+{: #titan-grip-gloves }
+
+Touch-sensitive gloves with integrated haptic feedback for VR.
+
+- **Price:** $65.00
+- **SKU:** CYM-TGG-2026
+
+## Cymbal Neo-Bean Coffee Maker
+{: #neo-bean-coffee-maker }
+
+AI-powered brewer that adjusts flavor profiles based on your sleep data.
+
+- **Price:** $210.00
+- **SKU:** CYM-NBC-2026
+
+## Cymbal Flow-State Desk
+{: #flow-state-desk }
+
+Standing desk that adjusts height based on your standing posture.
+
+- **Price:** $899.00
+- **SKU:** CYM-FSD-2026
+
+## Cymbal Spark-Light Torch
+{: #spark-light-torch }
+
+Ultra-bright torch that also acts as a mobile Wi-Fi 7 hotspot.
+
+- **Price:** $130.00
+- **SKU:** CYM-SLT-2026
+
+## Cymbal Zen-Mat Pro
+{: #zen-mat-pro }
+
+Yoga mat with integrated pressure sensors to correct your form.
+
+- **Price:** $150.00
+- **SKU:** CYM-ZMP-2026
