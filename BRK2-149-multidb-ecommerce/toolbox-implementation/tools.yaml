@@ -1,0 +1,343 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+sources:
+    alloydb-source:
+        kind: "alloydb-postgres"
+        project: "**********************"
+        region: "us-central1"
+        cluster: "*****"
+        instance: "*****"
+        database: "postgres"
+        user: "postgres"
+        password: "*****"
+    
+    mongo-source:
+        kind: "mongodb"
+        uri: "mongodb+srv://*****:*****@********"
+
+
+    bigquery-source:
+        kind: "bigquery"
+        project: "*****"
+        location: us
+
+tools:
+
+  # --- NL2SQL Tool for AlloyDB (Using standard postgres-sql for compatibility) ---
+   ask_alloydb_nl:
+    kind: postgres-sql
+    source: alloydb-source
+    description: Answers complex natural language questions about products, stock, and pricing using AlloyDB. Use this for questions like "What is the most expensive item?" or "List products with stock less than 10."
+    parameters:
+      - name: query
+        type: string
+        description: The natural language question to ask the database.
+    # We use a comment to signal the intent, or simply rely on the Agent to generate the SQL 
+    # since 'postgres-sql' is the most universally accepted 'kind' for Postgres sources.
+    statement: "{{.query}}"
+       
+  # AlloyDB Tool 1: Get Core Product Data
+   get_product_core_data:
+    kind: postgres-sql
+    source: alloydb-source
+    description: Retrieves the ID, name, price, and current stock level of a product.
+    parameters:
+      - name: product_id
+        type: string
+        description: The unique UUID identifier of the product.
+    statement: |
+      SELECT CAST(product_id AS VARCHAR) as product_id, name, sku, price, stock 
+      FROM products_core_table 
+      WHERE product_id = $1;
+
+  # AlloyDB Tool 2: Update Inventory (Crucial Write Operation)
+   update_inventory_level:
+    kind: postgres-sql
+    source: alloydb-source
+    description: Updates the stock count for a specific product after a purchase or return.
+    parameters:
+      - name: product_id
+        type: string
+        description: The UUID of the product to update.
+      - name: stock
+        type: integer
+        description: The new, absolute stock quantity to set.
+    statement: |
+      UPDATE products_core_table
+      SET stock = $2
+      WHERE product_id = $1;
+
+    # AlloyDB Tool 3: Simple Name Search
+   search_product_by_name:
+    kind: postgres-sql
+    source: alloydb-source
+    description: Searches the product names for a specified keyword.
+    parameters:
+      - name: keyword
+        type: string
+        description: The term to search for within the product names.
+    statement: |
+      SELECT product_id, name, price 
+      FROM products_core_table 
+      WHERE name ILIKE '%' || $1 || '%'
+      LIMIT 10;
+
+    # AlloyDB Tool 4: Fetching a List of Products
+   list_products_core:
+    kind: postgres-sql
+    source: alloydb-source
+    description: Retrieves a list of product ID, name, price, and SKU for the catalog view.
+    parameters: [] # No parameters needed for a full list
+    statement: |
+      SELECT CAST(product_id AS VARCHAR) as product_id, name, sku, price
+      FROM products_core_table
+      ORDER BY name ASC
+      LIMIT 100;
+
+# New Tool for Bulk Listing MongoDB Details
+   list_all_product_details:
+    kind: mongodb-find
+    source: mongo-source
+    description: Retrieves all flexible product details from MongoDB for merging into the catalog view.
+    database: ecommerce_db
+    collection: product_details_collection
+    projectPayload: |
+      {
+        "_id": 0, 
+        "product_id": 1, 
+        "description": 1,
+        "category": 1,
+        "reviews_summary": 1,
+        "sku": 1,
+        "specifications": 1
+
+      }
+    filterPayload: |
+          {}
+    limit: 1000
+
+
+
+# MongoDB Tool 1: Get Flexible Product Details
+   get_product_details:
+    kind: mongodb-find
+    source: mongo-source # Assuming your MongoDB source is named this
+    description: Retrieves the detailed product specifications, features, and reviews summary.
+    database: ecommerce_db
+    collection: product_details_collection
+    filterPayload: |
+      {
+        "product_id": {{json .product_id}}
+      }
+    projectPayload: |
+      {
+        "_id": 1,
+        "product_id": 1,
+        "category": 1,
+        "description": 1,
+        "specifications": 1,
+        "reviews_summary": 1
+      }
+    filterParams:
+      - name: product_id
+        type: string
+        description: The UUID key that matches the AlloyDB ID.
+    limit: 1
+
+# MongoDB Tool 2: Aggregate Product Statistics
+   get_product_stats_by_category:
+    kind: mongodb-aggregate
+    source: mongo-source
+    description: Calculates the average rating and total products grouped by category.
+    database: ecommerce_db
+    collection: product_details_collection
+    readOnly: true
+    pipelinePayload: |
+      [
+        {
+          "$group": {
+            "_id": "$category",
+            "average_rating": { "$avg": "$reviews_summary.average_rating" },
+            "product_count": { "$sum": 1 }
+          }
+        },
+        {
+          "$sort": {
+            "product_count": -1
+          }
+        }
+      ]
+    pipelineParams:
+      - name: category
+        type: string
+        description: The product category to filter by.
+    # No dynamic parameters needed for this basic aggregation
+
+#  Tool for MongoDB Write (User Tracking)
+   insert_user_interaction:
+    kind: mongodb-insert-one
+    source: mongo-source
+    description: Inserts a user interaction event (view, search, click) into the interactions collection.
+    database: ecommerce_db
+    collection: user_interactions_collection
+    canonical: true
+    authRequired: []
+
+   # New Tool for MongoDB Analytics Prep (ETL Source)
+   get_total_interactions_count:
+    kind: mongodb-aggregate
+    source: mongo-source
+    description: Counts the total number of user interaction events recorded in MongoDB.
+    database: ecommerce_db
+    collection: user_interactions_collection
+    readOnly: true
+    pipelinePayload: |
+      [
+        {
+          "$match": {
+            "product_id": { "$ne": null } 
+          }
+        },
+        {
+          "$group": {
+            "_id": "$product_id",       
+            "interaction_count": { "$sum": 1 }
+          }
+        },
+        {
+          "$project": {
+            "_id": 0,
+            "product_id": "$_id",       
+            "interaction_count": 1
+          }
+        },
+        {
+          "$limit": 1000
+        }
+      ]
+    pipelineParams:
+      - name: product_id
+        type: string
+        description: The id field to count the total number of events.
+
+# New Tool: Write MongoDB Summary to BigQuery
+   execute_sql_tool:
+    kind: bigquery-sql
+    source: bigquery-source 
+    description: Merges product interaction summary data into the BigQuery summary table for analytics.
+    parameters:
+      - name: product_summaries
+        type: string
+        description: A string of array of objects [{product_id, interaction_count}] from MongoDB.
+    statement: |
+      MERGE INTO `ecommerce_analytics.user_product_interactions` AS T
+      USING (
+          SELECT
+              JSON_VALUE(items, '$.product_id') AS product_id,
+              CAST(JSON_VALUE(items, '$.interaction_count') AS INT64) AS interaction_count
+          FROM
+               UNNEST(JSON_QUERY_ARRAY(@product_summaries)) AS items
+      ) AS S
+      ON T.product_id = S.product_id
+      WHEN MATCHED THEN
+          UPDATE SET T.interaction_score = S.interaction_count
+      WHEN NOT MATCHED THEN
+          INSERT (product_id, interaction_score)
+          VALUES (S.product_id, S.interaction_count);
+
+
+# Top 5 Analytics from BigQuery
+   get_top_5_views:
+    kind: bigquery-sql
+    source: bigquery-source
+    description: Retrieves the top 5 most viewed products across all users based on the last ETL run.
+    parameters: []
+    statement: |
+      SELECT
+        product_id,
+        interaction_score
+      FROM
+        `ecommerce_analytics.user_product_interactions`
+      ORDER BY
+        interaction_score DESC
+      LIMIT 5;
+
+# Analytics from BigQuery
+   get_all_analytics:
+    kind: bigquery-sql
+    source: bigquery-source
+    description: Retrieves all data from BigQuery analytics table.
+    parameters: []
+    statement: |
+      SELECT
+        product_id,
+        interaction_score
+      FROM
+        `ecommerce_analytics.user_product_interactions`
+      ORDER BY
+        interaction_score DESC
+      LIMIT 1000;
+
+# AlloyDB Intelligent Search: 
+   search_products_intelligent:
+    kind: postgres-sql
+    source: alloydb-source
+    description: A high-precision search that combines multimodal vector embeddings with an AI relevance filter. 
+    parameters:
+      - name: query
+        type: string
+        description: "The detailed search query or visual description from the user."
+    statement: |
+      SELECT
+        product_id,
+        name,
+        sku,
+        price,
+        '![Preview](https://storage.googleapis.com/ecommerce-app-images/' || sku || '.jpg)' AS preview_image
+      FROM (
+        SELECT
+          CAST(product_id AS VARCHAR) AS product_id,
+          name,
+          sku,
+          price
+        FROM
+          products_core_table
+        ORDER BY
+          img_embeddings <=> google_ml.text_embedding( 
+            model_id => 'multimodalembedding@001',
+            content => $1 
+          )::vector
+        LIMIT 10
+      ) AS vector_search
+      WHERE
+        ai.if('The product defined by its title here: ' || name || ' is relevant to the user request here: ' || $1 || ' at least 40%')
+      LIMIT 5;
+   
+
+toolsets:
+  ecommerce_toolset:
+    - list_all_product_details
+    - get_product_core_data
+    - update_inventory_level
+    - search_product_by_name
+    - list_products_core
+    - get_product_details
+    - get_product_stats_by_category
+    - insert_user_interaction
+    - get_total_interactions_count
+    - execute_sql_tool
+    - get_top_5_views
+    - get_all_analytics
+    - search_products_intelligent

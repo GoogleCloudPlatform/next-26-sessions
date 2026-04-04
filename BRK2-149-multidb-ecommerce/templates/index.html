@@ -1,0 +1,471 @@
+<!--
+ Copyright 2026 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>Polyglot E-commerce - Product Catalog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --card-color: #1e293b;
+            --primary-accent: #3b82f6;
+            --secondary-accent: #10b981;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --modal-bg: rgba(15, 23, 42, 0.9);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .app-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        h1 { text-align: center; margin-bottom: 40px; font-weight: 700; letter-spacing: -0.025em; }
+
+        .tab-nav-container { display: flex; justify-content: center; gap: 10px; }
+        .tab-button {
+            padding: 12px 28px; 
+            border: 1px solid var(--border-color); 
+            background-color: var(--surface-color); 
+            color: var(--text-secondary);
+            cursor: pointer; 
+            border-radius: 12px 12px 0 0; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: var(--bg-color);
+            color: var(--primary-accent);
+            border-bottom: 2px solid var(--primary-accent);
+        }
+        
+        .tab-content { 
+            padding: 40px 0; 
+            background-color: var(--bg-color); 
+            border: 1px solid var(--border-color); 
+            border-top: none; 
+            border-radius: 0 0 16px 16px;
+            min-height: 500px;
+        }
+        
+        /* Main Catalog Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 30px;
+        }
+        .product-card {
+            background-color: var(--card-color); 
+            padding: 20px; 
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease; 
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--primary-accent);
+        }
+        .product-card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 12px; 
+            margin-bottom: 16px; 
+            background-color: #0f172a;
+        }
+        .product-card h3 { margin: 0 0 8px 0; font-size: 1.1em; height: 2.5em; overflow: hidden; }
+        .product-card .sku-text { font-size: 0.85em; color: var(--text-secondary); margin-bottom: 12px; }
+        .product-card .price { font-size: 1.4em; font-weight: 700; color: var(--secondary-accent); margin-top: auto; }
+
+        /* Modal Styling */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--modal-bg);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--surface-color);
+            width: 90%;
+            max-width: 600px;
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--text-secondary); font-size: 24px; cursor: pointer; }
+        .modal-header { display: flex; gap: 20px; margin-bottom: 24px; }
+        .modal-img { width: 140px; height: 140px; border-radius: 12px; object-fit: cover; }
+        .modal-price { color: var(--secondary-accent); font-size: 1.5rem; font-weight: 700; }
+        .specs-list { list-style: none; padding: 0; margin: 20px 0 0 0; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .specs-list li { margin-bottom: 10px; display: flex; justify-content: space-between; }
+
+        .etl-box { text-align: center; margin: 30px; padding: 35px; border: 2px dashed var(--primary-accent); border-radius: 16px; background: rgba(59, 130, 246, 0.05); }
+        .analytics-bar { display: flex; align-items: center; padding: 12px; border-radius: 8px; background-color: #0f172a; margin-bottom: 10px; border: 1px solid #334155; }
+        
+        /* Chat Interface */
+        .agent-chat-window {
+            display: flex;
+            flex-direction: column;
+            height: 450px;
+            background: var(--surface-color);
+            border-radius: 16px;
+            border: 1px solid var(--primary-accent);
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            padding: 10px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .message.user { align-self: flex-end; background: var(--primary-accent); color: white; }
+        .message.agent { align-self: flex-start; background: var(--border-color); color: var(--text-primary); border-left: 4px solid var(--secondary-accent); }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: #0f172a;
+            gap: 10px;
+        }
+
+        #agent-input {
+            flex-grow: 1;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Interactive Chat Tiles (Bulleted List Fix) */
+        .chat-bubble ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 10px 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .chat-bubble li {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            width: calc(50% - 6px); /* 2 items per row */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .chat-bubble li:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Hide images in chat bubbles specifically */
+        .chat-bubble img { display: none !important; }
+
+        .chat-bubble li strong {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .chat-bubble {
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .chat-bubble table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+            background: #0f172a;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>☁️ Polyglot Architecture Demo</h1>
+
+        <div class="tab-nav-container">
+            <button class="tab-button active" onclick="showTab('products-view', this)">🛒 Product Catalog</button>
+            <button class="tab-button" onclick="showTab('etl-view', this)">💾 ETL & Analytics</button>
+            <button class="tab-button" onclick="showTab('agent-view', this)">🤖 AI Agent</button>
+        </div>
+
+        <div id="products-view" class="tab-content">
+            <div id="product-grid" class="product-grid">
+                <p id="loading-message" style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary);">Connecting to Polyglot API...</p> 
+            </div>
+        </div>
+
+        <div id="etl-view" class="tab-content" style="display: none;">
+            <div class="etl-box">
+                <h2 style="color: var(--text-primary);">Data Pipeline</h2>
+                <button id="run-etl-btn" style="background: var(--primary-accent); color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Run ETL Job</button>
+                <p id="etl-status" style="margin-top: 15px; color: var(--text-secondary);">Status: Idle</p>
+            </div>
+            <div id="top-5-chart-container" style="padding: 0 30px;"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <img id="m-img" class="modal-img" src="" alt="" onerror="this.src='https://storage.googleapis.com/ecommerce-app-images/fallback.jpg'">
+                <div>
+                    <h2 id="m-name" style="margin:0"></h2>
+                    <div id="m-price" class="modal-price"></div>
+                    <div id="m-stock" style="color: var(--text-secondary); margin: 5px 0;"></div>
+                    <div id="m-source" style="font-size: 0.75rem; background: #334155; padding: 2px 8px; border-radius: 4px;"></div>
+                </div>
+            </div>
+            <div id="m-desc" style="margin-bottom: 20px; line-height: 1.5; color: var(--text-secondary);"></div>
+            <ul id="specs-list" class="specs-list"></ul>
+        </div>
+    </div>
+
+    <div id="agent-view" class="tab-content" style="display: none; padding: 20px 30px;">
+        <div class="agent-chat-window">
+            <div id="chat-messages" class="chat-messages">
+                <div class="message agent">Hi! I can search inventory, check details in Mongo, or pull BigQuery analytics. How can I help?</div>
+            </div>
+            <div id="quick-replies" style="display: flex; gap: 8px; padding: 10px 20px; flex-wrap: wrap; background: #0f172a;">
+                <!-- Buttons will be injected here by JS -->
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="agent-input" placeholder="Ask about stock, trends, or product details...">
+                <button onclick="sendMessage()" style="background: var(--secondary-accent); border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; color: white; font-weight: bold;">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = ""; 
+        let globalProductList = []; // For chat interaction lookup
+
+        async function fetchProducts() {
+            const grid = document.getElementById('product-grid');
+            const loader = document.getElementById('loading-message');
+            try {
+                const response = await fetch(`${API_BASE}/products`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const products = await response.json();
+                
+                globalProductList = products; // Save to memory
+                loader.style.display = 'none';
+                grid.innerHTML = products.map(p => `
+                    <div class="product-card" onclick="showProductDetail('${p.product_id}')">
+                        <img src="${p.image_url}" onerror="this.src='https://storage.googleapis.com/ecommerce-app-images/fallback.jpg'">
+                        <h3>${p.name}</h3>
+                        <p class="sku-text">SKU: ${p.sku} | ${p.source}</p>
+                        <p class="price">$${parseFloat(p.price).toFixed(2)}</p>
+                    </div>
+                `).join('');
+            } catch (err) {
+                loader.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        async function showProductDetail(id) {
+            try {
+                fetch(`${API_BASE}/track/view`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ product_id: id, user_id: 'demo-user' })
+                });
+
+                const res = await fetch(`${API_BASE}/products/${id}`);
+                const p = await res.json();
+
+                document.getElementById('m-name').textContent = p.name;
+                document.getElementById('m-price').textContent = `$${parseFloat(p.price).toFixed(2)}`;
+                document.getElementById('m-stock').textContent = `Stock: ${p.stock || 0}`;
+                document.getElementById('m-source').textContent = p.source_note || "Hybrid Data Store";
+                document.getElementById('m-img').src = p.image_url;
+                document.getElementById('m-desc').textContent = p.description || "";
+                
+                const specs = document.getElementById('specs-list');
+                specs.innerHTML = p.specifications ? Object.entries(p.specifications).map(([k,v]) => `
+                    <li><span>${k.replace(/_/g, ' ')}</span><strong>${v}</strong></li>
+                `).join('') : '<li>No extra specs</li>';
+
+                document.getElementById('product-modal').classList.add('active');
+            } catch (err) { console.error(err); }
+        }
+
+        function closeModal() { document.getElementById('product-modal').classList.remove('active'); }
+
+        function showTab(id, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).style.display = 'block';
+            btn.classList.add('active');
+            if(id === 'etl-view') fetchAnalytics();
+        }
+
+        async function fetchAnalytics() {
+            const chart = document.getElementById('top-5-chart-container');
+            chart.innerHTML = '<p style="text-align:center">Fetching BigQuery rankings...</p>';
+            try {
+                const res = await fetch(`${API_BASE}/analytics/top5`);
+                const data = await res.json();
+                chart.innerHTML = '<h2 style="text-align:center; color:#fb7185">Top Trending Products</h2>' + 
+                    data.map((item, i) => `
+                        <div class="analytics-bar">
+                            <b style="width:30px; color:#fb7185">#${i+1}</b>
+                            <span style="flex-grow:1">${item.name}</span>
+                            <span style="background:#fb7185; padding:4px 10px; border-radius:4px; font-weight:bold">${item.total_views} Views</span>
+                        </div>
+                    `).join('');
+            } catch (err) { chart.innerHTML = '<p>Analytics unavailable.</p>'; }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('agent-input');
+            const container = document.getElementById('chat-messages');
+            const message = input.value.trim();
+            if (!message) return;
+
+            container.innerHTML += `<div class="message user">${message}</div>`;
+            input.value = '';
+            
+            const thinkingId = 'thinking-' + Date.now();
+            container.innerHTML += `<div id="${thinkingId}" class="message agent" style="opacity: 0.6;">Orchestrating agents...</div>`;
+            container.scrollTop = container.scrollHeight;
+
+            try {
+                const response = await fetch(`${API_BASE}/agent/chat`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await response.json();
+                
+                const thinkingEl = document.getElementById(thinkingId);
+                if (thinkingEl) thinkingEl.remove();
+
+                marked.setOptions({ gfm: true, breaks: true });
+                const renderedHtml = marked.parse(data.reply);
+
+                container.innerHTML += `<div class="message agent chat-bubble">${renderedHtml}</div>`;
+                
+                let suggestions = ["Show trending products", "Check stock", "Garden tools", "Fitness gadgets"];
+                renderQuickReplies(suggestions);
+
+                container.scrollTop = container.scrollHeight;
+
+            } catch (err) {
+                const thinkingEl = document.getElementById(thinkingId);
+                if (thinkingEl) thinkingEl.remove();
+                container.innerHTML += `<div class="message agent" style="color: #ef4444;">System busy. Try again.</div>`;
+            }
+        }
+
+        document.getElementById('run-etl-btn').onclick = async () => {
+            const status = document.getElementById('etl-status');
+            status.textContent = 'Running...';
+            try {
+                const res = await fetch(`${API_BASE}/etl/run`, { method: 'POST' });
+                const data = await res.json();
+                status.textContent = `Success! Processed ${data.products_processed} items.`;
+                fetchAnalytics();
+            } catch (err) { status.textContent = 'ETL Failed.'; }
+        };
+
+        function renderQuickReplies(replies) {
+            const chipContainer = document.getElementById('quick-replies');
+            chipContainer.innerHTML = '';
+            replies.forEach(text => {
+                const btn = document.createElement('button');
+                btn.innerText = text;
+                btn.style = "background: #334155; color: white; border: 1px solid #475569; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;";
+                btn.onmouseover = () => btn.style.background = "#3b82f6";
+                btn.onmouseout = () => btn.style.background = "#334155";
+                btn.onclick = () => {
+                    document.getElementById('agent-input').value = text;
+                    sendMessage();
+                };
+                chipContainer.appendChild(btn);
+            });
+        }
+
+        // TILE CLICK INTERACTION
+        document.addEventListener('click', function (e) {
+            const tile = e.target.closest('.chat-bubble li');
+            if (tile) {
+                const text = tile.innerText;
+                const skuMatch = text.match(/SKU:\s*([A-Za-z0-9-]+)/i);
+                if (skuMatch) {
+                    const sku = skuMatch[1].trim();
+                    const product = globalProductList.find(p => p.sku === sku);
+                    if (product) showProductDetail(product.product_id);
+                }
+            }
+        });
+
+        window.onload = fetchProducts;
+    </script>
+</body>
+</html>

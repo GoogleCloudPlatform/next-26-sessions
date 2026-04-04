@@ -1,0 +1,1924 @@
+[
+    {
+        "_id": {
+            "$oid": "68efcef65b72793012e17cab"
+        },
+        "user_id": "postgres",
+        "product_id": "7ec65daa-68b7-49c8-89cb-d92e7b95e34c",
+        "details": "Very happy with the product"
+    },
+    {
+        "_id": {
+            "$oid": "68efd367405f7db437e2d414"
+        },
+        "user_id": "postgres",
+        "product_id": "e7d3d0f6-0fdf-4ab0-81d8-0343b5781f0f",
+        "details": "Very happy with the product"
+    },
+    {
+        "_id": {
+            "$oid": "68f085427d4b04f38ef292b4"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T05:40:18.704135"
+    },
+    {
+        "_id": {
+            "$oid": "68f093d74f1a72c30e3f2c9c"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T06:42:31.425880"
+    },
+    {
+        "_id": {
+            "$oid": "68f093f14f1a72c30e3f2c9d"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T06:42:57.301784"
+    },
+    {
+        "_id": {
+            "$oid": "68f0a497314c5a5264d8c13f"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T07:53:59.817505"
+    },
+    {
+        "_id": {
+            "$oid": "68f0a5a2314c5a5264d8c140"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T07:58:26.073082"
+    },
+    {
+        "_id": {
+            "$oid": "68f0adfed49545f8e07d38f9"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:34:06.904958"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b17ad49545f8e07d38fa"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "9f790b89-9821-48b5-8488-18a30b2421dd",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:48:58.578554"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b262d49545f8e07d38fb"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "6887ca80-8de0-43fd-bbd6-388611518c46",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:52:49.989235"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b2bcd49545f8e07d38fc"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:54:20.837744"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b2c1d49545f8e07d38fd"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:54:25.288302"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b30dd49545f8e07d38fe"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:55:41.109885"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b384d49545f8e07d38ff"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:57:40.619519"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b3c61b2e131972f1a01a"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:58:46.422528"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b3ca1b2e131972f1a01b"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:58:50.715947"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b3f01b2e131972f1a01c"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T08:59:28.205691"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b4f51b2e131972f1a01d"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T09:03:49.734324"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b6261b2e131972f1a01e"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T09:08:54.838233"
+    },
+    {
+        "_id": {
+            "$oid": "68f0b62a1b2e131972f1a01f"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T09:08:58.967686"
+    },
+    {
+        "_id": {
+            "$oid": "68f0d77ddab5c0c355709a08"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "6887ca80-8de0-43fd-bbd6-388611518c46",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T11:31:09.774207"
+    },
+    {
+        "_id": {
+            "$oid": "68f0d785dab5c0c355709a09"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "6887ca80-8de0-43fd-bbd6-388611518c46",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T11:31:17.927084"
+    },
+    {
+        "_id": {
+            "$oid": "68f0d80adab5c0c355709a0a"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T11:33:30.911997"
+    },
+    {
+        "_id": {
+            "$oid": "68f1056ae57241a4c8da3d19"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "8cfcd9db-33cd-4030-aaca-152dcb140508",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T14:47:06.112646"
+    },
+    {
+        "_id": {
+            "$oid": "68f105e3e57241a4c8da3d1a"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "29d0657f-87e2-4406-b0ac-6b63df3e1188",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T14:49:07.604192"
+    },
+    {
+        "_id": {
+            "$oid": "68f10630e57241a4c8da3d1b"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "29d0657f-87e2-4406-b0ac-6b63df3e1188",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T14:50:24.045130"
+    },
+    {
+        "_id": {
+            "$oid": "68f108ace57241a4c8da3d1c"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:00:59.998860"
+    },
+    {
+        "_id": {
+            "$oid": "68f10986b88f40df2946bed5"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:04:38.180190"
+    },
+    {
+        "_id": {
+            "$oid": "68f109c7b88f40df2946bed6"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:05:43.565937"
+    },
+    {
+        "_id": {
+            "$oid": "68f10b4eb88f40df2946bed7"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "c47fedb2-f269-4051-9ae2-dc00d6c53b77",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:12:14.172385"
+    },
+    {
+        "_id": {
+            "$oid": "68f10b5fb88f40df2946bed8"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:12:31.658428"
+    },
+    {
+        "_id": {
+            "$oid": "68f10b9ab88f40df2946bed9"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:13:30.206264"
+    },
+    {
+        "_id": {
+            "$oid": "68f10db1b88f40df2946beda"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "a7f421ef-7950-4a39-ba70-b6db4a5590ce",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:22:25.027153"
+    },
+    {
+        "_id": {
+            "$oid": "68f10dbeb88f40df2946bedb"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:22:38.384527"
+    },
+    {
+        "_id": {
+            "$oid": "68f10dc3b88f40df2946bedc"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "c6734b55-5ef6-434b-9e69-4e87d2cbb6c7",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:22:43.495386"
+    },
+    {
+        "_id": {
+            "$oid": "68f10dc9b88f40df2946bedd"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "8cfcd9db-33cd-4030-aaca-152dcb140508",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:22:49.055809"
+    },
+    {
+        "_id": {
+            "$oid": "68f10f79b88f40df2946bede"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "8c2cf162-65b6-4747-981d-6654e6319e86",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T15:30:01.656460"
+    },
+    {
+        "_id": {
+            "$oid": "68f122fe1627498ad4899815"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "9f790b89-9821-48b5-8488-18a30b2421dd",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T16:53:18.698264"
+    },
+    {
+        "_id": {
+            "$oid": "68f123061627498ad4899816"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "9d90d14b-ddf3-43d9-b7b2-2048767ea35f",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-16T16:53:26.442310"
+    },
+    {
+        "_id": {
+            "$oid": "68f1ca79561e698d90bdf56a"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "7ec65daa-68b7-49c8-89cb-d92e7b95e34c",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T04:47:53.696806"
+    },
+    {
+        "_id": {
+            "$oid": "68f1ca80561e698d90bdf56b"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "c6734b55-5ef6-434b-9e69-4e87d2cbb6c7",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T04:48:00.759607"
+    },
+    {
+        "_id": {
+            "$oid": "68f1ca8a561e698d90bdf56c"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "3bc5bc92-ca69-40e8-8edb-fba7ff18f24e",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T04:48:10.359532"
+    },
+    {
+        "_id": {
+            "$oid": "68f1ca92561e698d90bdf56d"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "379f1d4e-e50d-4d46-a49e-da1e59e12a6b",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T04:48:18.169790"
+    },
+    {
+        "_id": {
+            "$oid": "68f1fb3c69cdf92da7a28377"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "e34b8389-99bf-439e-9bb3-76dee7ba2a37",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T08:15:55.921516"
+    },
+    {
+        "_id": {
+            "$oid": "68f1fb3c69cdf92da7a28378"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T08:15:56.714847"
+    },
+    {
+        "_id": {
+            "$oid": "68f1fb3c69cdf92da7a28379"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "e34b8389-99bf-439e-9bb3-76dee7ba2a37",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T08:15:56.739581"
+    },
+    {
+        "_id": {
+            "$oid": "68f1fb4469cdf92da7a2837a"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "c7dd9bb4-d2db-472e-af5d-fb70e175a4d8",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T08:16:04.066661"
+    },
+    {
+        "_id": {
+            "$oid": "68f1fb6469cdf92da7a2837b"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "7ec65daa-68b7-49c8-89cb-d92e7b95e34c",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T08:16:36.631872"
+    },
+    {
+        "_id": {
+            "$oid": "68f1fb6f69cdf92da7a2837c"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "941e40e1-dadf-4996-a16c-a9102a3690fd",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-17T08:16:47.009602"
+    },
+    {
+        "_id": {
+            "$oid": "68f8cfa092277a9f7aaa79a7"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "9f7085c3-26b6-4d10-96a1-62237f6b975a",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-22T12:35:44.267282"
+    },
+    {
+        "_id": {
+            "$oid": "68f8d01292277a9f7aaa79a8"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "c7dd9bb4-d2db-472e-af5d-fb70e175a4d8",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-22T12:37:38.362726"
+    },
+    {
+        "_id": {
+            "$oid": "69014ea975c97fbcc105cdf8"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "06523234-2a5c-49fb-b801-e18b72ee3578",
+        "details": "User viewed this product.",
+        "timestamp": "2025-10-28T23:15:53.872338"
+    },
+    {
+        "_id": {
+            "$oid": "69149adbaefde349daee1b75"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "6e984210-9ba9-4399-8bcb-97aba77f8d45",
+        "details": "User viewed this product.",
+        "timestamp": "2025-11-12T14:34:03.215986"
+    },
+    {
+        "_id": {
+            "$oid": "69149b4baefde349daee1b76"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "2d6af534-0b78-43a0-a63a-e2169d0db4ba",
+        "details": "User viewed this product.",
+        "timestamp": "2025-11-12T14:35:55.385827"
+    },
+    {
+        "_id": {
+            "$oid": "69149b58aefde349daee1b77"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "e34b8389-99bf-439e-9bb3-76dee7ba2a37",
+        "details": "User viewed this product.",
+        "timestamp": "2025-11-12T14:36:08.560072"
+    },
+    {
+        "_id": {
+            "$oid": "69c12bb2f534503ecb14232e"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "ab799389-90af-410c-9758-4c9c3726eb75",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T12:01:54.913790"
+    },
+    {
+        "_id": {
+            "$oid": "69c137599ae4a925757b0825"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T12:51:37.329157"
+    },
+    {
+        "_id": {
+            "$oid": "69c13f4a9ae4a925757b0826"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T13:25:29.965808"
+    },
+    {
+        "_id": {
+            "$oid": "69c140b49ae4a925757b0827"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T13:31:32.825354"
+    },
+    {
+        "_id": {
+            "$oid": "69c1536750374da3c37e02f9"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T14:51:19.482525"
+    },
+    {
+        "_id": {
+            "$oid": "69c1536850374da3c37e02fa"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T14:51:20.419314"
+    },
+    {
+        "_id": {
+            "$oid": "69c1536c50374da3c37e02fb"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T14:51:24.515706"
+    },
+    {
+        "_id": {
+            "$oid": "69c1545c50374da3c37e02fc"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "d41a0fef-a723-4007-b343-c8492d046b39",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T14:55:24.028450"
+    },
+    {
+        "_id": {
+            "$oid": "69c155cf50374da3c37e02fd"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T15:01:35.462089"
+    },
+    {
+        "_id": {
+            "$oid": "69c155d050374da3c37e02fe"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T15:01:36.176002"
+    },
+    {
+        "_id": {
+            "$oid": "69c1566350374da3c37e02ff"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": [
+            113,
+            136,
+            206,
+            87,
+            92,
+            78,
+            68,
+            199,
+            144,
+            85,
+            22,
+            81,
+            156,
+            26,
+            141,
+            91
+        ],
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T15:04:03.109259"
+    },
+    {
+        "_id": {
+            "$oid": "69c1566450374da3c37e0300"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": [
+            113,
+            136,
+            206,
+            87,
+            92,
+            78,
+            68,
+            199,
+            144,
+            85,
+            22,
+            81,
+            156,
+            26,
+            141,
+            91
+        ],
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T15:04:04.017428"
+    },
+    {
+        "_id": {
+            "$oid": "69c159f250374da3c37e0301"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T15:19:14.461699"
+    },
+    {
+        "_id": {
+            "$oid": "69c15a0450374da3c37e0302"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "cc1862fa-bed4-4e41-85cb-008cd9139505",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T15:19:32.276563"
+    },
+    {
+        "_id": {
+            "$oid": "69c164ea392fa62629538393"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": [
+            61,
+            165,
+            119,
+            220,
+            239,
+            233,
+            68,
+            27,
+            165,
+            102,
+            55,
+            8,
+            99,
+            207,
+            248,
+            241
+        ],
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:06:02.364944"
+    },
+    {
+        "_id": {
+            "$oid": "69c16922392fa62629538394"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "d41a0fef-a723-4007-b343-c8492d046b39",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:24:01.991736"
+    },
+    {
+        "_id": {
+            "$oid": "69c16a90392fa62629538395"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:30:07.912316"
+    },
+    {
+        "_id": {
+            "$oid": "69c16ca7392fa62629538396"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "2be09a87-0343-4119-80d6-aa37fe863b8d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:39:03.303011"
+    },
+    {
+        "_id": {
+            "$oid": "69c16ca8392fa62629538397"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "2be09a87-0343-4119-80d6-aa37fe863b8d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:39:04.340153"
+    },
+    {
+        "_id": {
+            "$oid": "69c16cae392fa62629538398"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:39:10.078475"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f04392fa62629538399"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "2be09a87-0343-4119-80d6-aa37fe863b8d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:49:08.570739"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f11392fa6262953839a"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "2d366cf0-db29-4cf6-b830-bb8f59a8ef3f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:49:21.254004"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f11392fa6262953839b"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "2d366cf0-db29-4cf6-b830-bb8f59a8ef3f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:49:21.759888"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f22392fa6262953839c"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:49:38.777558"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f23392fa6262953839d"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:49:39.509378"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f3f392fa6262953839e"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:50:07.699613"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f44392fa6262953839f"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:50:12.664437"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f4a392fa626295383a0"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "3e4629a1-60cd-4dea-adb0-f1090241b87d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:50:18.532834"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f58392fa626295383a1"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "07b829a3-b578-41f3-8f9c-786e068a0634",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:50:32.372081"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f59392fa626295383a2"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "07b829a3-b578-41f3-8f9c-786e068a0634",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:50:33.642354"
+    },
+    {
+        "_id": {
+            "$oid": "69c16f89392fa626295383a3"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "9d90d14b-ddf3-43d9-b7b2-2048767ea35f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T16:51:21.556529"
+    },
+    {
+        "_id": {
+            "$oid": "69c17cc02b99e2b7be0202e0"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T17:47:44.452510"
+    },
+    {
+        "_id": {
+            "$oid": "69c17cc12b99e2b7be0202e1"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T17:47:45.410061"
+    },
+    {
+        "_id": {
+            "$oid": "69c17ce62b99e2b7be0202e2"
+        },
+        "user_id": "guest-ai-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T17:48:22.702284"
+    },
+    {
+        "_id": {
+            "$oid": "69c18af68176d92cb6fc518e"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "8cfcd9db-33cd-4030-aaca-152dcb140508",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T18:48:22.886969"
+    },
+    {
+        "_id": {
+            "$oid": "69c18afd8176d92cb6fc518f"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "1b3f910e-f890-4cdb-8081-3dde520acd1b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T18:48:29.430250"
+    },
+    {
+        "_id": {
+            "$oid": "69c18b4f8176d92cb6fc5190"
+        },
+        "user_id": "a0a0a0a0-0000-0000-0000-000000000001",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T18:49:51.514722"
+    },
+    {
+        "_id": {
+            "$oid": "69c18d398176d92cb6fc5191"
+        },
+        "user_id": "demo-user-123",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T18:58:00.974023"
+    },
+    {
+        "_id": {
+            "$oid": "69c18d408176d92cb6fc5192"
+        },
+        "user_id": "demo-user-123",
+        "product_id": "ed48c159-45df-4092-8b0a-897ce52ff4c2",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T18:58:08.214286"
+    },
+    {
+        "_id": {
+            "$oid": "69c18d478176d92cb6fc5193"
+        },
+        "user_id": "demo-user-123",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T18:58:15.116909"
+    },
+    {
+        "_id": {
+            "$oid": "69c192a9ca1f33f6948eb3bf"
+        },
+        "user_id": "demo-user-123",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T19:21:13.294236"
+    },
+    {
+        "_id": {
+            "$oid": "69c1a204883d1cdb5c5cfb8c"
+        },
+        "user_id": "demo-user",
+        "product_id": "7d15978b-2137-4f82-8120-8c6bd9d964aa",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T20:26:44.602610"
+    },
+    {
+        "_id": {
+            "$oid": "69c1a212883d1cdb5c5cfb8d"
+        },
+        "user_id": "demo-user",
+        "product_id": "ed48c159-45df-4092-8b0a-897ce52ff4c2",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T20:26:58.845699"
+    },
+    {
+        "_id": {
+            "$oid": "69c1a220883d1cdb5c5cfb8e"
+        },
+        "user_id": "demo-user",
+        "product_id": "087c86a3-acfa-4b1f-8e04-065db130cc68",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T20:27:12.670864"
+    },
+    {
+        "_id": {
+            "$oid": "69c1a229883d1cdb5c5cfb8f"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-23T20:27:21.372976"
+    },
+    {
+        "_id": {
+            "$oid": "69c1fe88ce885ba0ddd26901"
+        },
+        "user_id": "demo-user",
+        "product_id": "ed48c159-45df-4092-8b0a-897ce52ff4c2",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:01:28.982070"
+    },
+    {
+        "_id": {
+            "$oid": "69c1fe8fce885ba0ddd26902"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:01:35.932625"
+    },
+    {
+        "_id": {
+            "$oid": "69c20207ce885ba0ddd26903"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "timestamp": "2026-03-24T03:16:23.959488"
+    },
+    {
+        "_id": {
+            "$oid": "69c2022ace885ba0ddd26904"
+        },
+        "user_id": "demo-user",
+        "product_id": "8cfcd9db-33cd-4030-aaca-152dcb140508",
+        "timestamp": "2026-03-24T03:16:58.426642"
+    },
+    {
+        "_id": {
+            "$oid": "69c20382ce885ba0ddd26905"
+        },
+        "user_id": "demo-user",
+        "product_id": "c99d0081-7865-4739-af19-8fb89245828f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:22:42.444105"
+    },
+    {
+        "_id": {
+            "$oid": "69c20387ce885ba0ddd26906"
+        },
+        "user_id": "demo-user",
+        "product_id": "55720576-04a6-4da7-9018-663fddfd7758",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:22:47.785298"
+    },
+    {
+        "_id": {
+            "$oid": "69c2038bce885ba0ddd26907"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:22:51.075287"
+    },
+    {
+        "_id": {
+            "$oid": "69c20391ce885ba0ddd26908"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:22:57.502425"
+    },
+    {
+        "_id": {
+            "$oid": "69c203e2ce885ba0ddd26909"
+        },
+        "user_id": "demo-user",
+        "product_id": "9d90d14b-ddf3-43d9-b7b2-2048767ea35f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:24:18.112407"
+    },
+    {
+        "_id": {
+            "$oid": "69c2088d8f1f4c5ca7b53e9e"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:44:13.614057"
+    },
+    {
+        "_id": {
+            "$oid": "69c2089e8f1f4c5ca7b53e9f"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:44:30.013057"
+    },
+    {
+        "_id": {
+            "$oid": "69c208e78f1f4c5ca7b53ea0"
+        },
+        "user_id": "demo-user",
+        "product_id": "3e4629a1-60cd-4dea-adb0-f1090241b87d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:45:43.198653"
+    },
+    {
+        "_id": {
+            "$oid": "69c209098f1f4c5ca7b53ea1"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:46:17.028330"
+    },
+    {
+        "_id": {
+            "$oid": "69c209c68f1f4c5ca7b53ea2"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:49:26.843178"
+    },
+    {
+        "_id": {
+            "$oid": "69c209d18f1f4c5ca7b53ea3"
+        },
+        "user_id": "demo-user",
+        "product_id": "1b3f910e-f890-4cdb-8081-3dde520acd1b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:49:37.919357"
+    },
+    {
+        "_id": {
+            "$oid": "69c209f98f1f4c5ca7b53ea4"
+        },
+        "user_id": "demo-user",
+        "product_id": "91154022-a6ff-43d5-9d95-aeee20454bef",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:50:17.015349"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a0e8f1f4c5ca7b53ea5"
+        },
+        "user_id": "demo-user",
+        "product_id": "8cfcd9db-33cd-4030-aaca-152dcb140508",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:50:38.274819"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a148f1f4c5ca7b53ea6"
+        },
+        "user_id": "demo-user",
+        "product_id": "860f4db0-2d66-4a1a-aedb-13d6392090c3",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:50:44.242409"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a218f1f4c5ca7b53ea7"
+        },
+        "user_id": "demo-user",
+        "product_id": "3e4629a1-60cd-4dea-adb0-f1090241b87d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:50:57.375259"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a288f1f4c5ca7b53ea8"
+        },
+        "user_id": "demo-user",
+        "product_id": "9d90d14b-ddf3-43d9-b7b2-2048767ea35f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:51:04.832379"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a308f1f4c5ca7b53ea9"
+        },
+        "user_id": "demo-user",
+        "product_id": "ed48c159-45df-4092-8b0a-897ce52ff4c2",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:51:12.031083"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a358f1f4c5ca7b53eaa"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:51:17.436721"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a3a8f1f4c5ca7b53eab"
+        },
+        "user_id": "demo-user",
+        "product_id": "488c96f9-3924-4775-88b1-538a6ad84bc6",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:51:22.616866"
+    },
+    {
+        "_id": {
+            "$oid": "69c20a3f8f1f4c5ca7b53eac"
+        },
+        "user_id": "demo-user",
+        "product_id": "af817649-8607-43d7-976a-69522d2d563a",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:51:27.597804"
+    },
+    {
+        "_id": {
+            "$oid": "69c20afd8f1f4c5ca7b53ead"
+        },
+        "user_id": "demo-user",
+        "product_id": "270e7025-112d-45c9-bc84-939ed2f739f1",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T03:54:37.048877"
+    },
+    {
+        "_id": {
+            "$oid": "69c2185488d7f516c1c40af0"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T04:51:32.021517"
+    },
+    {
+        "_id": {
+            "$oid": "69c21f54a9a4b267f4158dca"
+        },
+        "user_id": "demo-user",
+        "product_id": "24eca0d1-eb8b-4353-aed0-7c0f99f0613c",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:21:24.946780"
+    },
+    {
+        "_id": {
+            "$oid": "69c21f5aa9a4b267f4158dcb"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:21:30.492946"
+    },
+    {
+        "_id": {
+            "$oid": "69c21f67a9a4b267f4158dcc"
+        },
+        "user_id": "demo-user",
+        "product_id": "ab799389-90af-410c-9758-4c9c3726eb75",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:21:43.621831"
+    },
+    {
+        "_id": {
+            "$oid": "69c21f85a9a4b267f4158dcd"
+        },
+        "user_id": "demo-user",
+        "product_id": "c8e2b9a1-7d34-4f5a-bc8e-2f9a1b8c7d6e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:22:13.957629"
+    },
+    {
+        "_id": {
+            "$oid": "69c21f96a9a4b267f4158dce"
+        },
+        "user_id": "demo-user",
+        "product_id": "2403c9ba-9f6f-485c-8475-8ce994d6cd8e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:22:30.937697"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fbba9a4b267f4158dcf"
+        },
+        "user_id": "demo-user",
+        "product_id": "c6cafddd-001a-438b-93f1-3f16cb2a825a",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:07.633309"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fc0a9a4b267f4158dd0"
+        },
+        "user_id": "demo-user",
+        "product_id": "c99d0081-7865-4739-af19-8fb89245828f",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:12.778020"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fc4a9a4b267f4158dd1"
+        },
+        "user_id": "demo-user",
+        "product_id": "83bbe251-00e7-4074-9db5-329ed57a2ad4",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:16.871903"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fcaa9a4b267f4158dd2"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:22.964870"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fcda9a4b267f4158dd3"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:25.627317"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fcfa9a4b267f4158dd4"
+        },
+        "user_id": "demo-user",
+        "product_id": "8d892a26-21dc-4528-abf0-f0fc8750769d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:27.717257"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fd2a9a4b267f4158dd5"
+        },
+        "user_id": "demo-user",
+        "product_id": "2be09a87-0343-4119-80d6-aa37fe863b8d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:30.311771"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fd7a9a4b267f4158dd6"
+        },
+        "user_id": "demo-user",
+        "product_id": "25ab7ec0-abcf-4c99-8b10-e0b70897bfb0",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:35.358530"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fdba9a4b267f4158dd7"
+        },
+        "user_id": "demo-user",
+        "product_id": "69d05942-6f51-465d-b45b-41160b7cc833",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:38.998704"
+    },
+    {
+        "_id": {
+            "$oid": "69c21fdea9a4b267f4158dd8"
+        },
+        "user_id": "demo-user",
+        "product_id": "77beb912-7372-4e82-99b8-7a81f1b24764",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T05:23:42.585312"
+    },
+    {
+        "_id": {
+            "$oid": "69c22040a9a4b267f4158dd9"
+        },
+        "user_id": "demo-user",
+        "product_id": "192cc654-071b-4a7e-8521-57c451e4249d",
+        "timestamp": "2026-03-24T05:25:20.317168"
+    },
+    {
+        "_id": {
+            "$oid": "69c22044a9a4b267f4158dda"
+        },
+        "user_id": "demo-user",
+        "product_id": "193f0e33-374d-4f2c-b9ff-bda1b1f4fc5e",
+        "timestamp": "2026-03-24T05:25:24.487109"
+    },
+    {
+        "_id": {
+            "$oid": "69c22047a9a4b267f4158ddb"
+        },
+        "user_id": "demo-user",
+        "product_id": "533f2e91-e457-4564-8fad-5d89e0a6a452",
+        "timestamp": "2026-03-24T05:25:27.622883"
+    },
+    {
+        "_id": {
+            "$oid": "69c2204ba9a4b267f4158ddc"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "timestamp": "2026-03-24T05:25:31.790295"
+    },
+    {
+        "_id": {
+            "$oid": "69c2204fa9a4b267f4158ddd"
+        },
+        "user_id": "demo-user",
+        "product_id": "55720576-04a6-4da7-9018-663fddfd7758",
+        "timestamp": "2026-03-24T05:25:35.186400"
+    },
+    {
+        "_id": {
+            "$oid": "69c22054a9a4b267f4158dde"
+        },
+        "user_id": "demo-user",
+        "product_id": "fdf08c34-c0e9-43f2-8fc1-a548b441b26a",
+        "timestamp": "2026-03-24T05:25:40.423271"
+    },
+    {
+        "_id": {
+            "$oid": "69c22057a9a4b267f4158ddf"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "timestamp": "2026-03-24T05:25:43.735471"
+    },
+    {
+        "_id": {
+            "$oid": "69c2205aa9a4b267f4158de0"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "timestamp": "2026-03-24T05:25:46.680149"
+    },
+    {
+        "_id": {
+            "$oid": "69c2205da9a4b267f4158de1"
+        },
+        "user_id": "demo-user",
+        "product_id": "8d892a26-21dc-4528-abf0-f0fc8750769d",
+        "timestamp": "2026-03-24T05:25:49.110307"
+    },
+    {
+        "_id": {
+            "$oid": "69c220c9a9a4b267f4158de2"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "timestamp": "2026-03-24T05:27:37.470185"
+    },
+    {
+        "_id": {
+            "$oid": "69c220d0a9a4b267f4158de3"
+        },
+        "user_id": "demo-user",
+        "product_id": "8d892a26-21dc-4528-abf0-f0fc8750769d",
+        "timestamp": "2026-03-24T05:27:44.492241"
+    },
+    {
+        "_id": {
+            "$oid": "69c2223aa9a4b267f4158de4"
+        },
+        "user_id": "demo-user",
+        "product_id": "2d366cf0-db29-4cf6-b830-bb8f59a8ef3f",
+        "timestamp": "2026-03-24T05:33:46.742640"
+    },
+    {
+        "_id": {
+            "$oid": "69c22248a9a4b267f4158de5"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "timestamp": "2026-03-24T05:34:00.248003"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e31bf90adaef6ff9a60"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "timestamp": "2026-03-24T06:24:49.375594"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e35bf90adaef6ff9a61"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "timestamp": "2026-03-24T06:24:53.604062"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e38bf90adaef6ff9a62"
+        },
+        "user_id": "demo-user",
+        "product_id": "7d15978b-2137-4f82-8120-8c6bd9d964aa",
+        "timestamp": "2026-03-24T06:24:56.664721"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e3cbf90adaef6ff9a63"
+        },
+        "user_id": "demo-user",
+        "product_id": "70a138a5-db5c-4b5a-90da-309c77041761",
+        "timestamp": "2026-03-24T06:25:00.958893"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e40bf90adaef6ff9a64"
+        },
+        "user_id": "demo-user",
+        "product_id": "cc1862fa-bed4-4e41-85cb-008cd9139505",
+        "timestamp": "2026-03-24T06:25:04.486514"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e46bf90adaef6ff9a65"
+        },
+        "user_id": "demo-user",
+        "product_id": "17551652-92c5-4642-8015-c95610af5a6c",
+        "timestamp": "2026-03-24T06:25:10.900806"
+    },
+    {
+        "_id": {
+            "$oid": "69c22e4abf90adaef6ff9a66"
+        },
+        "user_id": "demo-user",
+        "product_id": "17551652-92c5-4642-8015-c95610af5a6c",
+        "timestamp": "2026-03-24T06:25:14.370253"
+    },
+    {
+        "_id": {
+            "$oid": "69c230b6bf90adaef6ff9a67"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:35:34.511649"
+    },
+    {
+        "_id": {
+            "$oid": "69c230cbbf90adaef6ff9a68"
+        },
+        "user_id": "demo-user",
+        "product_id": "d41a0fef-a723-4007-b343-c8492d046b39",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:35:55.254301"
+    },
+    {
+        "_id": {
+            "$oid": "69c230dfbf90adaef6ff9a69"
+        },
+        "user_id": "demo-user",
+        "product_id": "17551652-92c5-4642-8015-c95610af5a6c",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:36:15.979263"
+    },
+    {
+        "_id": {
+            "$oid": "69c230e2bf90adaef6ff9a6a"
+        },
+        "user_id": "demo-user",
+        "product_id": "17551652-92c5-4642-8015-c95610af5a6c",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:36:18.280783"
+    },
+    {
+        "_id": {
+            "$oid": "69c230e4bf90adaef6ff9a6b"
+        },
+        "user_id": "demo-user",
+        "product_id": "17551652-92c5-4642-8015-c95610af5a6c",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:36:20.107228"
+    },
+    {
+        "_id": {
+            "$oid": "69c23104bf90adaef6ff9a6c"
+        },
+        "user_id": "demo-user",
+        "product_id": "7d15978b-2137-4f82-8120-8c6bd9d964aa",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:36:52.172891"
+    },
+    {
+        "_id": {
+            "$oid": "69c23106bf90adaef6ff9a6d"
+        },
+        "user_id": "demo-user",
+        "product_id": "7d15978b-2137-4f82-8120-8c6bd9d964aa",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:36:54.105688"
+    },
+    {
+        "_id": {
+            "$oid": "69c23122bf90adaef6ff9a6e"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:22.434517"
+    },
+    {
+        "_id": {
+            "$oid": "69c23124bf90adaef6ff9a6f"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:24.515945"
+    },
+    {
+        "_id": {
+            "$oid": "69c23126bf90adaef6ff9a70"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:26.237411"
+    },
+    {
+        "_id": {
+            "$oid": "69c23128bf90adaef6ff9a71"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:28.847387"
+    },
+    {
+        "_id": {
+            "$oid": "69c2312abf90adaef6ff9a72"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:30.561830"
+    },
+    {
+        "_id": {
+            "$oid": "69c2312cbf90adaef6ff9a73"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:32.508078"
+    },
+    {
+        "_id": {
+            "$oid": "69c2312ebf90adaef6ff9a74"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:34.263034"
+    },
+    {
+        "_id": {
+            "$oid": "69c23131bf90adaef6ff9a75"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:37.391664"
+    },
+    {
+        "_id": {
+            "$oid": "69c23133bf90adaef6ff9a76"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:39.244675"
+    },
+    {
+        "_id": {
+            "$oid": "69c23135bf90adaef6ff9a77"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:37:41.013539"
+    },
+    {
+        "_id": {
+            "$oid": "69c23276bf90adaef6ff9a78"
+        },
+        "user_id": "demo-user",
+        "product_id": "6f1fbe3f-7ba0-4491-8238-0c6dd0193e6d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:43:02.834356"
+    },
+    {
+        "_id": {
+            "$oid": "69c232d6bf90adaef6ff9a79"
+        },
+        "user_id": "demo-user",
+        "product_id": "6f1fbe3f-7ba0-4491-8238-0c6dd0193e6d",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-24T06:44:38.372037"
+    },
+    {
+        "_id": {
+            "$oid": "69c3c02c5de0ef7b8b210a94"
+        },
+        "product_id": "087c86a3-acfa-4b1f-8e04-065db130cc68",
+        "interaction_type": "view"
+    },
+    {
+        "_id": {
+            "$oid": "69c44163fcad41dac0b1d259"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-25T20:11:15.742739"
+    },
+    {
+        "_id": {
+            "$oid": "69c459111b8442372e3116de"
+        },
+        "product_id": "6c7d8e9f-0a1b-2c3d-4e5f-6a7b8c9d0e1f",
+        "event_type": "view"
+    },
+    {
+        "_id": {
+            "$oid": "69c549d0c8c4e50717ec9bac"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T14:59:28.507947"
+    },
+    {
+        "_id": {
+            "$oid": "69c549d4c8c4e50717ec9bad"
+        },
+        "user_id": "demo-user",
+        "product_id": "ab799389-90af-410c-9758-4c9c3726eb75",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T14:59:32.389224"
+    },
+    {
+        "_id": {
+            "$oid": "69c55373c8c4e50717ec9bae"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T15:40:35.339945"
+    },
+    {
+        "_id": {
+            "$oid": "69c55456c8c4e50717ec9baf"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T15:44:22.910481"
+    },
+    {
+        "_id": {
+            "$oid": "69c554e2c8c4e50717ec9bb0"
+        },
+        "user_id": "demo-user",
+        "product_id": "69d05942-6f51-465d-b45b-41160b7cc833",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T15:46:42.766260"
+    },
+    {
+        "_id": {
+            "$oid": "69c554e9c8c4e50717ec9bb1"
+        },
+        "user_id": "demo-user",
+        "product_id": "ab799389-90af-410c-9758-4c9c3726eb75",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T15:46:49.416371"
+    },
+    {
+        "_id": {
+            "$oid": "69c55502c8c4e50717ec9bb2"
+        },
+        "user_id": "demo-user",
+        "product_id": "69d05942-6f51-465d-b45b-41160b7cc833",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T15:47:14.308542"
+    },
+    {
+        "_id": {
+            "$oid": "69c5576bc8c4e50717ec9bb3"
+        },
+        "user_id": "demo-user",
+        "product_id": "fa049dd4-e203-4a4c-9928-21c3229c1847",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T15:57:31.981194"
+    },
+    {
+        "_id": {
+            "$oid": "69c560e2c8c4e50717ec9bb4"
+        },
+        "user_id": "demo-user",
+        "product_id": "ab799389-90af-410c-9758-4c9c3726eb75",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T16:37:54.977705"
+    },
+    {
+        "_id": {
+            "$oid": "69c56115c8c4e50717ec9bb5"
+        },
+        "user_id": "demo-user",
+        "product_id": "ab799389-90af-410c-9758-4c9c3726eb75",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T16:38:45.695918"
+    },
+    {
+        "_id": {
+            "$oid": "69c56118c8c4e50717ec9bb6"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T16:38:48.409130"
+    },
+    {
+        "_id": {
+            "$oid": "69c56128c8c4e50717ec9bb7"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T16:39:04.148304"
+    },
+    {
+        "_id": {
+            "$oid": "69c562e5c8c4e50717ec9bb8"
+        },
+        "user_id": "demo-user",
+        "product_id": "b72014e2-cf13-4c2a-b84f-32aec45cb002",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-26T16:46:29.037120"
+    },
+    {
+        "_id": {
+            "$oid": "69cba7f88f80624f9995369e"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:54:48.665987"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8058f80624f9995369f"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:01.299128"
+    },
+    {
+        "_id": {
+            "$oid": "69cba80d8f80624f999536a0"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:09.573361"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8108f80624f999536a1"
+        },
+        "user_id": "demo-user",
+        "product_id": "7188ce57-5c4e-44c7-9055-16519c1a8d5b",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:12.464281"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8138f80624f999536a2"
+        },
+        "user_id": "demo-user",
+        "product_id": "d41a0fef-a723-4007-b343-c8492d046b39",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:15.328692"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8168f80624f999536a3"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:18.216166"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8188f80624f999536a4"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:20.371452"
+    },
+    {
+        "_id": {
+            "$oid": "69cba81a8f80624f999536a5"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:22.081774"
+    },
+    {
+        "_id": {
+            "$oid": "69cba81b8f80624f999536a6"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:23.577528"
+    },
+    {
+        "_id": {
+            "$oid": "69cba81d8f80624f999536a7"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:25.172511"
+    },
+    {
+        "_id": {
+            "$oid": "69cba81f8f80624f999536a8"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:27.202935"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8238f80624f999536a9"
+        },
+        "user_id": "demo-user",
+        "product_id": "58f50b95-49d5-43fa-96b9-b3641679e215",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:55:31.211250"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8cb8f80624f999536aa"
+        },
+        "user_id": "demo-user",
+        "product_id": "69d05942-6f51-465d-b45b-41160b7cc833",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:58:19.387654"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8d58f80624f999536ab"
+        },
+        "user_id": "demo-user",
+        "product_id": "c7896903-c44f-4597-beae-712f398e170e",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:58:29.544860"
+    },
+    {
+        "_id": {
+            "$oid": "69cba8ef8f80624f999536ac"
+        },
+        "user_id": "demo-user",
+        "product_id": "8b59e23d-b38c-43d9-987a-d9c083c77f73",
+        "details": "User viewed this product.",
+        "timestamp": "2026-03-31T10:58:55.593640"
+    }
+]

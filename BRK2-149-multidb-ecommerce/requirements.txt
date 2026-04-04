@@ -1,0 +1,12 @@
+Flask==2.3.3
+google-adk==1.27.5
+google-cloud-aiplatform==1.143.0
+google-genai>=1.9.0
+requests==2.33.0
+httpx>=0.27.0
+debugpy
+pymongo
+python-dotenv
+toolbox-langchain==0.5.2
+toolbox-core
+vertexai

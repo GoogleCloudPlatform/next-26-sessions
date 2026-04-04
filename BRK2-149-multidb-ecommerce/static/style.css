@@ -1,0 +1,126 @@
+/*
+ * Copyright 2026 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Polyglot E-commerce - Dark Polish Theme
+ * This file complements the dark theme and provides standard resets.
+ */
+
+:root {
+    --brand-blue: #3b82f6;
+    --brand-dark: #0f172a;
+}
+
+body {
+    background-color: var(--brand-dark);
+    background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    min-height: 100vh;
+}
+
+/* Scrollbar Styling for Dark Theme */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Improved focus states for accessibility */
+button:focus {
+    outline: 2px solid var(--brand-blue);
+    outline-offset: 2px;
+}
+
+.analytics-container h2 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+/* Glassmorphism for cards */
+.product-card {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Transitions */
+.tab-content {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated Agent Tab */
+.agent-chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    background: var(--surface-color);
+    border-radius: 16px;
+    border: 1px solid var(--primary-accent);
+    overflow: hidden;
+    animation: slideUp 0.5s ease-out;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    padding: 10px 16px;
+    border-radius: 12px;
+    max-width: 80%;
+    line-height: 1.4;
+}
+
+.message.user { align-self: flex-end; background: var(--primary-accent); color: white; }
+.message.agent { align-self: flex-start; background: var(--border-color); color: var(--text-primary); border-left: 4px solid var(--secondary-accent); }
+
+.chat-input-area {
+    display: flex;
+    padding: 15px;
+    background: #0f172a;
+    gap: 10px;
+}
+
+#agent-input {
+    flex-grow: 1;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
