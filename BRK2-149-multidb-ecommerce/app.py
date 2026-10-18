@@ -15,7 +15,6 @@
 import os
 import json
 from flask import Flask, jsonify, request, render_template
-from toolbox_langchain import ToolboxClient
 from dotenv import load_dotenv
 from datetime import datetime
 from google import genai
@@ -28,6 +27,7 @@ from google.adk.sessions import InMemorySessionService  # Add this import
 import asyncio
 import threading
 import vertexai
+from flask_cors import CORS
 
 # Load environment variables (including MONGODB_CONNECTION_STRING and server URL)
 load_dotenv()
@@ -57,14 +57,74 @@ if not TOOLBOX_URL:
     raise ValueError("MCP_TOOLBOX_SERVER_URL not set in environment.")
 
 try:
-    toolbox = ToolboxClient(TOOLBOX_URL)
     toolboxCore = ToolboxSyncClient(TOOLBOX_URL)
-    all_tools = toolboxCore.load_toolset("ecommerce_toolset") 
-    print(f"-> MCP Client: Connected to {TOOLBOX_URL}")
-    #print(result)
+    all_tools = toolboxCore.load_toolset("ecommerce_toolset")
+    print(f"-> MCP Client: Successfully loaded {len(all_tools)} tools from {TOOLBOX_URL} (Session Kept Open)")
 except Exception as e:
-    print(f"FATAL ERROR: Could not connect to MCP Toolbox Server. Is the server running? Error: {e}")
-    exit()
+    print(f"FATAL ERROR: Could not connect to MCP Toolbox Server at {TOOLBOX_URL}. Error: {e}")
+    exit(1)
+
+# Replace your current get_preloaded_tool function with this:
+def get_preloaded_tool(tool_name):
+    """Finds and returns a loaded tool from the pre-warmed toolset."""
+    for tool in all_tools:
+        # Check standard SDK name attribute
+        if hasattr(tool, 'name') and tool.name == tool_name:
+            return tool
+        # Check if the tool uses private property mapping
+        if hasattr(tool, '_name') and tool._name == tool_name:
+            return tool
+        # Check dictionary-like structure
+        if isinstance(tool, dict) and tool.get('name') == tool_name:
+            return tool
+        # Fallback to string representations
+        if str(tool) == tool_name:
+            return tool
+            
+    # Print the available tools for debugging if lookups fail
+    available_names = []
+    for t in all_tools:
+        if hasattr(t, 'name'): available_names.append(t.name)
+        elif hasattr(t, '_name'): available_names.append(t._name)
+        else: available_names.append(str(t))
+    print(f"ERROR: Tool '{tool_name}' not found. Available tools: {available_names}")
+    raise ValueError(f"Tool '{tool_name}' was not found in the loaded toolset.")
+
+def execute_tool(tool_name, params=None):
+    """
+    Safely finds a preloaded tool and executes it natively.
+    Resolves compatibility between the legacy '.invoke()' and modern callable '__call__' structures.
+    """
+    tool = get_preloaded_tool(tool_name)
+    params = params or {}
+    
+    print(f"DEBUG: Attempting to execute '{tool_name}' with parameters {params}")
+    
+    try:
+        # 1. Prefer legacy invoke if explicitly supported by this Tool wrapper
+        if hasattr(tool, 'invoke') and callable(getattr(tool, 'invoke')):
+            print(f"DEBUG: Executing '{tool_name}' using fallback '.invoke()'")
+            return tool.invoke(params)
+            
+        # 2. Modern stateless callable execution fallback
+        elif callable(tool):
+            print(f"DEBUG: Executing '{tool_name}' directly as a function call")
+            # Unpack params dictionary safely
+            return tool(**params)
+            
+        else:
+            # Check if we can extract invoke from a private/hidden property
+            for attr in ['_invoke', '_run', 'run']:
+                if hasattr(tool, attr) and callable(getattr(tool, attr)):
+                    print(f"DEBUG: Executing '{tool_name}' using custom attribute '{attr}'")
+                    return getattr(tool, attr)(**params)
+                    
+            raise AttributeError(f"Tool {tool_name} is neither callable nor does it support '.invoke()'")
+            
+    except Exception as e:
+        print(f"ERROR: Failed executing tool '{tool_name}' with parameters {params}. Error: {e}")
+        raise e
+
 
 
 # Helper function to safely decode data received from the MCP client
@@ -77,7 +137,11 @@ def safe_decode_data(data):
             return None
     return data 
 
+
+
 app = Flask(__name__)
+# This allows standard cross-origin resource requests on all endpoints
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # --- New Route to Serve the Frontend ---
 @app.route('/')
@@ -86,89 +150,66 @@ def index():
     return render_template('index.html')
 
 # --- Routes ---
-
 @app.route('/products/<product_id>', methods=['GET'])
 def get_product(product_id):
-    """
-    Retrieves a complete product by combining core data (AlloyDB) and details (MongoDB).
-    Uses safe decoding to handle string/list/dict variability from MCP tool output.
-    """
-    
     raw_core = None
     raw_details = None
 
     # --- 1. FETCH CORE TRANSACTIONAL DATA (AlloyDB) ---
     try:
-        core_tool = toolbox.load_tool("get_product_core_data")
-        raw_core_response = core_tool.invoke({"product_id": product_id})
-        
-        # Safely decode the list result
-        decoded_core_list = safe_decode_data(raw_core_response)
-
-        # Extract the single dictionary (it's the first element in the list)
-        raw_core = decoded_core_list[0] if isinstance(decoded_core_list, list) and decoded_core_list else None
-        
+        raw_core_response = execute_tool("get_product_core_data", {"product_id": product_id})
+        decoded_core = safe_load_tool_result(raw_core_response)
+        if decoded_core and isinstance(decoded_core, list):
+            raw_core = decoded_core[0]
+        elif isinstance(decoded_core, dict):
+            raw_core = decoded_core
+        print(f"DEBUG /products/<id> Core Data: {raw_core}")
     except Exception as e:
-        print(f"Warning: AlloyDB core data fetch failed for ID {product_id}. {e}")
+        print(f"Warning: AlloyDB core data fetch failed for ID {product_id}: {e}")
 
     # --- 2. FETCH FLEXIBLE CATALOG DETAILS (MongoDB) ---
     try:
-        details_tool = toolbox.load_tool("get_product_details")
-        raw_details_response = details_tool.invoke({"product_id": product_id})
-        
-        # Safely decode the list result
-        decoded_details_list = safe_decode_data(raw_details_response)
-
-        # Extract the single dictionary
-        raw_details = decoded_details_list[0] if isinstance(decoded_details_list, list) and decoded_details_list else None
-
+        raw_details_response = execute_tool("get_product_details", {"product_id": product_id})
+        decoded_details = safe_load_tool_result(raw_details_response)
+        if decoded_details and isinstance(decoded_details, list):
+            raw_details = decoded_details[0]
+        elif isinstance(decoded_details, dict):
+            raw_details = decoded_details
+        print(f"DEBUG /products/<id> Details Data: {raw_details}")
     except Exception as e:
-        print(f"Warning: MongoDB detail fetch failed for ID {product_id}. {e}")
-    
-    
-    # --- 3. MERGE AND FALLBACK LOGIC ---
-    core_data = {} if not raw_core else raw_core
-    details_data = {} if not raw_details else raw_details
+        print(f"Warning: MongoDB detail fetch failed for ID {product_id}: {e}")
 
-    if core_data:
-        # SCENARIO A/C: AlloyDB Hit. Merge details if found.
-        full_product = {**core_data, **details_data} 
-        
+    # --- 3. MERGE LOGIC ---
+    core_data = raw_core if isinstance(raw_core, dict) else {}
+    details_data = raw_details if isinstance(raw_details, dict) else {}
+
+    if core_data or details_data:
+        full_product = {**details_data, **core_data}
         if not details_data:
-             full_product['source_note'] = 'PARTIAL MODE: MongoDB details missing.'
-
-    elif details_data:
-        # SCENARIO B: AlloyDB Miss, MongoDB Hit (Disjoint Fallback)
-        
-        # Synthesize core fields using MongoDB data
-        synth_core = {
-            'product_id': details_data.get('product_id'),
-            'name': f"MongoDB Product: {details_data.get('category', 'Generic')}", 
-            'price': 39.99, 
-            'sku': details_data.get('sku', 'SYNTH-001'), 
-            'stock': 999,
-            'source_note': 'FALLBACK MODE: Core data synthesized from MongoDB details.'
-        }
-        full_product = {**synth_core, **details_data}
-
+            full_product['source_note'] = 'PARTIAL MODE: MongoDB details missing.'
     else:
-        # SCENARIO D: Total Miss
+        # Fallback: Check if the product was already loaded in memory or catalog
+        print(f"ERROR: Both AlloyDB and MongoDB missed for ID {product_id}")
         return jsonify({"message": f"Product ID {product_id} not found in any data store."}), 404
-        
-    
+
+    # Ensure price has a valid numeric value
+    if 'price' not in full_product or full_product['price'] is None:
+        full_product['price'] = 0.0
+
+    # Ensure stock exists
+    if 'stock' not in full_product or full_product['stock'] is None:
+        full_product['stock'] = 0
+
     # --- 4. Final Enrichment (GCS Image URL) ---
-    sku = full_product.get('sku', 'N/A')
-    
+    sku = full_product.get('sku', '')
     if sku and sku != 'N/A':
         full_product['image_url'] = f"{GCS_BASE_URL}/{sku}.jpg"
         full_product['fallback_url'] = FALLBACK_IMAGE_URL
     else:
         full_product['image_url'] = FALLBACK_IMAGE_URL
         full_product['fallback_url'] = FALLBACK_IMAGE_URL
-        
-    
-    return jsonify(full_product)
 
+    return jsonify(full_product)
 
 
 @app.route('/inventory/<category>', methods=['GET'])
@@ -177,87 +218,150 @@ def get_category_inventory_stats(category):
     Demonstrates using a single MongoDB Aggregation tool for analytics.
     """
     try:
-        stats_tool = toolbox.load_tool("get_product_stats_by_category")
-        # The tool requires no parameters, so we invoke with an empty dictionary
-        stats_data = stats_tool.invoke({"category": category})
+        # execute_tool handles the entire lookup and native call for you!
+        stats_data = execute_tool("get_product_stats_by_category", {"category": category})
         
+        # Ensure we decode the result safely before sending it to the frontend
+        parsed_stats = safe_load_tool_result(stats_data)
         return jsonify({
             "message": "Product statistics successfully aggregated from MongoDB.",
-            "statistics": stats_data
+            "statistics": parsed_stats
         })
-        
     except Exception as e:
+        print(f"Error on category inventory lookup: {e}")
         return jsonify({"error": "Failed to run category aggregation tool.", "details": str(e)}), 500
 
-# --- Helper to safely load results from MCP tool ---
-def safe_load_tool_result(result):
-    if isinstance(result, str):
-        try:
-            return json.loads(result)
-        except json.JSONDecodeError:
-            print(f"Error: Could not decode JSON string from tool result.")
-            return []
-    return result if isinstance(result, list) else []
 
+
+
+def safe_load_tool_result(result):
+    if result is None:
+        return []
+
+    # --- Step 1: Unpack standard Stateless MCP list wrapper content ---
+    if isinstance(result, list) and len(result) > 0:
+        first_item = result[0]
+        if hasattr(first_item, 'text'):
+            result = first_item.text
+        elif isinstance(first_item, dict) and 'text' in first_item:
+            result = first_item['text']
+
+    # Unpack nested structures
+    if hasattr(result, 'content'):
+        if isinstance(result.content, list) and len(result.content) > 0:
+            first_content = result.content[0]
+            if hasattr(first_content, 'text'):
+                result = first_content.text
+            elif isinstance(first_content, dict) and 'text' in first_content:
+                result = first_content['text']
+        else:
+            result = result.content
+            
+    if hasattr(result, 'text'):
+        result = result.text
+
+    # --- Step 2: Parse and Clean JSON strings ---
+    if isinstance(result, str):
+        result_str = result.strip()
+        # Clean standard unescaped Markdown JSON blocks
+        if result_str.startswith("```json"):
+            result_str = result_str[7:]
+        elif result_str.startswith("```"):
+            result_str = result_str[3:]
+        if result_str.endswith("```"):
+            result_str = result_str[:-3]
+        result_str = result_str.strip()
+        
+        try:
+            parsed = json.loads(result_str)
+            if isinstance(parsed, dict):
+                for key in ['result', 'data', 'products', 'content', 'items']:
+                    if key in parsed and isinstance(parsed[key], list):
+                        return parsed[key]
+                return [parsed]
+            return parsed if isinstance(parsed, list) else [parsed]
+        except json.JSONDecodeError as e:
+            print(f"Error: Could not decode JSON string from tool result. Reason: {e}")
+            print(f"Failed string context: {result_str[:150]}")
+            return []
+
+    # --- Step 3: Parse standard Python Dictionaries ---
+    elif isinstance(result, dict):
+        for key in ['result', 'data', 'products', 'content', 'items']:
+            if key in result and isinstance(result[key], list):
+                return result[key]
+        return [result]
+
+    # --- Step 4: Fallback for clean lists ---
+    elif isinstance(result, list):
+        cleaned_list = []
+        for item in result:
+            if isinstance(item, dict):
+                cleaned_list.append(item)
+            elif hasattr(item, 'text'):
+                try:
+                    parsed_item = json.loads(item.text)
+                    if isinstance(parsed_item, list):
+                        cleaned_list.extend(parsed_item)
+                    else:
+                        cleaned_list.append(parsed_item)
+                except Exception:
+                    pass
+        if cleaned_list:
+            return cleaned_list
+        return result
+
+    return []
 
 
 
 @app.route('/products', methods=['GET'])
 def list_products():
-    """
-    Unified Catalog: 
-    1. Fetches core products from AlloyDB.
-    2. Fetches all rich details from MongoDB.
-    3. Merges them on 'product_id' to provide a seamless polyglot view.
-    """
     final_catalog = []
-    
     try:
         # 1. Fetch Core Data (AlloyDB)
-        core_tool = toolbox.load_tool("list_products_core")
-        alloydb_products = safe_load_tool_result(core_tool.invoke({}))
-        
+        raw_core_res = execute_tool("list_products_core", {})
+        alloydb_products = safe_load_tool_result(raw_core_res)
+        print(f"DEBUG: AlloyDB raw response: {raw_core_res}")
+  
         # 2. Fetch All Rich Details (MongoDB)
-        details_tool = toolbox.load_tool("list_all_product_details")
-        mongodb_details = safe_load_tool_result(details_tool.invoke({}))
-        
-        # Create a lookup map for MongoDB details for O(1) matching
-        details_map = {item['product_id']: item for item in mongodb_details if 'product_id' in item}
-
+        raw_details_res = execute_tool("list_all_product_details", {})
+        mongodb_details = safe_load_tool_result(raw_details_res)
+        print(f"DEBUG: MongoDB raw response: {raw_details_res}")
+  
+        details_map = {item['product_id']: item for item in mongodb_details if isinstance(item, dict) and 'product_id' in item}
+  
         # 3. Merge Strategy
         for core_prod in alloydb_products:
+            if not isinstance(core_prod, dict):
+                continue
             pid = core_prod.get('product_id')
             sku = core_prod.get('sku')
-            
-            # Find matching details
             rich_details = details_map.get(pid, {})
             
-            # Combine: Core data takes priority for name/price/sku
             merged_product = {**rich_details, **core_prod}
-            
-            # Enrichment
             merged_product['image_url'] = f"{GCS_BASE_URL}/{sku}.jpg" if sku else FALLBACK_IMAGE_URL
             merged_product['source'] = 'Polyglot (AlloyDB + MongoDB)'
-            
             final_catalog.append(merged_product)
-
+  
         # 4. Handle edge case: Products in Mongo but NOT in AlloyDB (Disjoint)
-        # Only if you still want to show them; otherwise, AlloyDB is the primary list.
-        alloy_ids = {p['product_id'] for p in alloydb_products}
+        alloy_ids = {p.get('product_id') for p in alloydb_products if isinstance(p, dict)}
         for pid, details in details_map.items():
             if pid not in alloy_ids:
                 details['name'] = f"New: {details.get('category', 'Product')}"
-                details['price'] = 0.00  # Indicative of missing transactional data
+                details['price'] = 0.00
                 details['stock'] = 0
                 details['source'] = 'MongoDB Only'
                 details['image_url'] = f"{GCS_BASE_URL}/{details.get('sku')}.jpg" if details.get('sku') else FALLBACK_IMAGE_URL
                 final_catalog.append(details)
 
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         print(f"Error building unified catalog: {e}")
         return jsonify({"error": "Catalog generation failed", "details": str(e)}), 500
 
-    return jsonify(final_catalog)       
+    return jsonify(final_catalog)
 
 
 
@@ -278,7 +382,7 @@ def track_user_view():
 
     try:
         # 1. Load the specific MongoDB insertion tool
-        insert_tool = toolbox.load_tool("insert_user_interaction")
+        insert_tool = get_preloaded_tool("insert_user_interaction")
 
         # 2. Prepare the data as a JSON string
         data = {
@@ -290,7 +394,7 @@ def track_user_view():
         data_json = json.dumps(data)
 
         # 3. Invoke the tool with the data parameter
-        response = insert_tool.invoke({"data": data_json})
+        response = execute_tool("insert_user_interaction", {"data": data_json})
 
         # 4. Process the response
         print(response)
@@ -310,12 +414,10 @@ def track_user_view():
 def get_product_by_id():
     """
     Retrieves a single product, prioritizing AlloyDB data and falling back to MongoDB details.
-    Includes explicit JSON decoding to prevent the TypeError.
     """
     data = request.json
     user_id = data.get('user_id', 'User')
     product_id = data.get('product_id')
-    
     if not product_id:
         return jsonify({"error": "product_id is required."}), 400
 
@@ -324,51 +426,33 @@ def get_product_by_id():
 
     # --- 1. FETCH CORE TRANSACTIONAL DATA (AlloyDB) ---
     try:
-        core_tool = toolbox.load_tool("get_product_core_data")
-        raw_core_response = core_tool.invoke({"product_id": product_id})
-        
+        raw_core_response = execute_tool("get_product_core_data", {"product_id": product_id})
         # Decode the raw response string/list safely
         decoded_core_list = safe_decode_data(raw_core_response)
-
-        # Extract the dictionary (it's the first element in the list)
         raw_core = decoded_core_list[0] if isinstance(decoded_core_list, list) and decoded_core_list else None
-        
     except Exception as e:
         print(f"Warning: AlloyDB core data fetch failed for ID {product_id}. {e}")
 
     # --- 2. FETCH FLEXIBLE CATALOG DETAILS (MongoDB) ---
     try:
-        details_tool = toolbox.load_tool("get_product_details")
-        raw_details_response = details_tool.invoke({"product_id": product_id})
-        
+        raw_details_response = execute_tool("get_product_details", {"product_id": product_id})
         # Decode the raw response string/list safely
         decoded_details_list = safe_decode_data(raw_details_response)
-
-        # Extract the dictionary (it's the first element in the list)
         raw_details = decoded_details_list[0] if isinstance(decoded_details_list, list) and decoded_details_list else None
-
     except Exception as e:
         print(f"Warning: MongoDB detail fetch failed for ID {product_id}. {e}")
-    
-    
-    # --- 3. MERGE AND FALLBACK LOGIC ---
 
+    # --- 3. MERGE AND FALLBACK LOGIC ---
     core_data = {} if not raw_core else raw_core
     details_data = {} if not raw_details else raw_details
 
-    # SCENARIO A: Full Merge (The ideal, coherent case) OR SCENARIO C (AlloyDB Hit)
+    # SCENARIO A: Full Merge OR SCENARIO C (AlloyDB Hit)
     if core_data:
-        # Core data is present. Merge any details found.
         full_product = {**core_data, **details_data} 
-        
-        # Add source note if details were missing
         if not details_data:
-             full_product['source_note'] = 'PARTIAL MODE: MongoDB details missing.'
-
+            full_product['source_note'] = 'PARTIAL MODE: MongoDB details missing.'
     elif details_data:
         # SCENARIO B: AlloyDB Miss, MongoDB Hit (The Disjoint Fallback)
-        
-        # Synthesize required core fields from MongoDB data
         synth_core = {
             'product_id': details_data.get('product_id'),
             'name': f"MongoDB Product: {details_data.get('category', 'Generic')}", 
@@ -377,27 +461,21 @@ def get_product_by_id():
             'stock': 999,
             'source_note': 'FALLBACK MODE: Core data synthesized from MongoDB details.'
         }
-        
-        # Merge synthesized core with rich MongoDB details
         full_product = {**synth_core, **details_data}
-
     else:
         # SCENARIO D: Total Miss
         return jsonify({"message": f"Product ID {product_id} not found in any data store."}), 404
-        
-    
+
     # --- 4. Final Enrichment (GCS Image URL) ---
     sku = full_product.get('sku', 'N/A')
-    
     if sku and sku != 'N/A':
         full_product['image_url'] = f"{GCS_BASE_URL}/{sku}.jpg"
         full_product['fallback_url'] = FALLBACK_IMAGE_URL
     else:
         full_product['image_url'] = FALLBACK_IMAGE_URL
         full_product['fallback_url'] = FALLBACK_IMAGE_URL
-        
-    
     return jsonify(full_product)
+
 
 
 @app.route('/etl/run', methods=['POST'])
@@ -409,23 +487,23 @@ def run_etl_to_bigquery():
     """
     try:
         # --- 1. READ/EXTRACT/TRANSFORM (MongoDB via MCP) ---
-        mongo_summary_tool = toolbox.load_tool("get_total_interactions_count")
+        mongo_summary_tool = get_preloaded_tool("get_total_interactions_count")
         
         # This returns the aggregated list: [{'product_id': '...', 'interaction_count': N}, ...]
-        summary_data = mongo_summary_tool.invoke({"product_id":""})
+        summary_data = execute_tool("get_total_interactions_count", {"product_id":""})
         
         if not summary_data:
             return jsonify({"message": "No interaction data to transfer."}), 200
 
         # --- 2. WRITE/LOAD (BigQuery via MCP) ---
-        bq_write_tool = toolbox.load_tool("execute_sql_tool")
+        bq_write_tool = get_preloaded_tool("execute_sql_tool")
         
         # Hardcoded JSON string - THIS IS THE KEY STEP
         #hardcoded_json_string = '[{"interaction_count":1,"product_id":"06523234-2a5c-49fb-b801-e18b72ee3578"}]'
 
 
         # BigQuery tool execution
-        bq_response = bq_write_tool.invoke({"product_summaries": summary_data})
+        bq_response = execute_tool("execute_sql_tool", {"product_summaries": summary_data})
         print(bq_response)
         
         return jsonify({
@@ -441,44 +519,41 @@ def run_etl_to_bigquery():
 
 @app.route('/analytics/top5', methods=['GET'])
 def get_top_5_products():
-    """
-    1. Gets Top 5 IDs from BigQuery.
-    2. Hydrates with AlloyDB (Core) AND MongoDB (Details) to match the Catalog format.
-    """
     try:
         # 1. Fetch ranking from BigQuery
-        top5_tool = toolbox.load_tool("get_top_5_views")
-        top5_response = top5_tool.invoke({})
-        
+        top5_response = execute_tool("get_top_5_views", {})
         if not top5_response:
             return jsonify([]), 200
 
-        # Ensure we have a list of dicts
-        items = safe_decode_data(top5_response)
+        items = safe_load_tool_result(top5_response)
         if not items or not isinstance(items, list):
-            return jsonify([]), 200
-        
+            items = safe_decode_data(top5_response)
+            if not items or not isinstance(items, list):
+                return jsonify([]), 200
+
         top_products_list = []
-        
         for top_item in items:
+            if not isinstance(top_item, dict):
+                continue
             product_id = top_item.get('product_id')
-            if not product_id: continue
-            
+            if not product_id: 
+                continue
+
             # --- 2. HYDRATE CORE (AlloyDB) ---
             core_data = {}
             try:
-                core_res = toolbox.load_tool("get_product_core_data").invoke({"product_id": product_id})
-                decoded_core = safe_decode_data(core_res)
+                core_res = execute_tool("get_product_core_data", {"product_id": product_id})
+                decoded_core = safe_load_tool_result(core_res)
                 if decoded_core and isinstance(decoded_core, list):
                     core_data = decoded_core[0]
             except Exception as e:
                 print(f"AlloyDB fail for {product_id}: {e}")
 
-            # --- 3. HYDRATE DETAILS (MongoDB) - THIS WAS MISSING ---
+            # --- 3. HYDRATE DETAILS (MongoDB) ---
             details_data = {}
             try:
-                details_res = toolbox.load_tool("get_product_details").invoke({"product_id": product_id})
-                decoded_details = safe_decode_data(details_res)
+                details_res = execute_tool("get_product_details", {"product_id": product_id})
+                decoded_details = safe_load_tool_result(details_res)
                 if decoded_details and isinstance(decoded_details, list):
                     details_data = decoded_details[0]
             except Exception as e:
@@ -486,21 +561,16 @@ def get_top_5_products():
 
             # --- 4. MERGE & ENRICH ---
             if core_data or details_data:
-                # Use the same merge logic as /products/<id>
                 product = {**details_data, **core_data}
-                
-                # Add analytics specific metadata
-                product['total_views'] = top_item.get('interaction_score', 0)
-                
-                # Image Logic (Using standard GCS path as requested)
+                product['total_views'] = top_item.get('interaction_score', top_item.get('interaction_count', 0))
                 sku = product.get('sku')
                 product['image_url'] = f"{GCS_BASE_URL}/{sku}.jpg" if sku else FALLBACK_IMAGE_URL
-                
                 top_products_list.append(product)
 
         return jsonify(top_products_list)
-        
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         print(f"Analytics Exception: {e}")
         return jsonify({"error": "BigQuery Analytics failed.", "details": str(e)}), 500
 
@@ -579,24 +649,23 @@ orchestrator = adk.Agent(
     description="The primary intelligence and manager for the Polyglot E-commerce system.",
     tools=all_tools,
     instruction="""
-    You are a very intelliegent, deeply analytical Global Supply Chain and E-commerce Brain. 
+    You are a very intelligent, deeply analytical Global Supply Chain and E-commerce Brain. 
     Your mission is to provide grounded, data-backed answers by orchestrating specialized agents and tools.
+
     Introduce yourself with a comprehensive bullet list of the things you can do in short and concise sentences.
     Even before the user can type something you can introduce yourself.
 
     HIERARCHY & DELEGATION:
     1. Always attempt to check 'list_all_product_details' from the catalog agent first. This is your primary catalog context for categories, descriptions, and specs.
-    2. Delegate specific products, categories, features, specifications, prices, reviews  specific questions to CatalogSpecialist.
-    2. Delegate inventory-related questions like 'Is it in stock?' or 'What is trending?' to InventorySpecialist.
-    3. Delegate 'Update the database' or 'Run analytics sync' to ETLSpecialist.
-    4. For complex analytical queries involving multiple steps, use BISpecialist.
-    5. For overall generic queries on data analysis and summary, use CatalogSpecialist.
-    6. At times you may have to run complex multi agent reasoning and analysis and will have to use multiple tools across these agents.
+    2. Delegate specific products, categories, features, specifications, prices, reviews and specific questions to CatalogSpecialist.
+    3. Delegate inventory-related questions like 'Is it in stock?' or 'What is trending?' to InventorySpecialist.
+    4. Delegate 'Update the database' or 'Run analytics sync' to ETLSpecialist.
+    5. For complex analytical queries involving multiple steps, use BISpecialist.
+    6. For overall generic queries on data analysis and summary, use CatalogSpecialist.
+    7. At times you may have to run complex multi-agent reasoning and analysis and will have to use multiple tools across these agents.
        You are authorized to do that and for those reasons you are allowed to join and analyze data across multiple agents, tools and steps and respond to the user.
-    7. Never tell the user that you cannot fulfill a request. Use your intelligence to get the nearest possible response and do not invent facts.
+    8. Never tell the user that you cannot fulfill a request. Use your intelligence to get the nearest possible response and do not invent facts.
     Never display product id to the user.
-
-
 
     OPERATING PROTOCOLS (CRITICAL):
     - INTELLIGENT DISCOVERY: For any search query that involves looking up product contextually by descriptions, specific features, or negative constraints (e.g., 'not electronic', 'wooden', 'vibrant'), ALWAYS use the 'search_products_intelligent' tool first. 
@@ -613,13 +682,14 @@ orchestrator = adk.Agent(
     - You MUST output the results as a bulleted list using the asterisk (*).
     - Format every list item exactly like this so the tile is complete:
       * **[Product Name]** - SKU: [sku] - $[Price]
-      - DATA_PASS_THROUGH (STRICT):
+    - DATA_PASS_THROUGH (STRICT):
       - NEVER output raw Product IDs (UUIDs) to the user.
       - If a tool only gives you an ID, you MUST use 'list_all_product_details' to find the corresponding SKU before responding.
-    - **MOST CRITICAL** Remember. Ultimately you have access to product specification tool, inventory tool, intelligent search products tool, analytics tool to fetch popularity, and insert user interaction tool. As an agent you can always combine the results with their product id and generate specific results for user response groudned by data comin from those tools instead of saying I am unable to or I cannoy unless the product or user ask is completely irrelevant and not at all close to our business.
+    - **MOST CRITICAL** Remember: Ultimately you have access to product specification tool, inventory tool, intelligent search products tool, analytics tool to fetch popularity, and insert user interaction tool. As an agent you can always combine the results with their product id and generate specific results for user response grounded by data coming from those tools instead of saying I am unable to or I cannot unless the product or user ask is completely irrelevant and not at all close to our business.
     """,
     sub_agents=[catalog_agent, inventory_agent, etl_agent, bi_agent]
 )
+
 session_service = VertexAiSessionService(project=PROJECT_ID,location=GOOGLE_CLOUD_LOCATION)
 
 
